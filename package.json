@@ -1,0 +1,18 @@
+{
+	"name": "clipboard",
+	"version": "1.0.0",
+	"description": "get file path from win32 clipboard",
+	"main": "./lib/index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"scripts": {
+		"test": "node ./test",
+		"install": "node-gyp rebuild"
+	},
+	"author": "zman",
+	"license": "ISC",
+	"gypfile": true,
+	"dependencies": {}
+}
