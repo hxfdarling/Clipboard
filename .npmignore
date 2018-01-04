@@ -14,3 +14,4 @@ yarn.lock
 /build/config.gypi
 /src
 /.vscode
+/binding.gyp
