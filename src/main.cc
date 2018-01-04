@@ -1,4 +1,4 @@
-#include <node.h>
+﻿#include <node.h>
 #include <windows.h>
 using namespace std;
 namespace moa
@@ -11,15 +11,19 @@ using v8::Object;
 using v8::String;
 using v8::Value;
 
-char *WCharToChar(WCHAR *s)
+char *GBK2Utf8(const char *strGBK)
 {
-  int w_nlen = WideCharToMultiByte(CP_ACP, 0, s, -1, NULL, 0, NULL, false);
-  char *ret = new char[w_nlen];
-  memset(ret, 0, w_nlen);
-  WideCharToMultiByte(CP_ACP, 0, s, -1, ret, w_nlen, NULL, false);
-  return ret;
+  WCHAR *str1;
+  int n = MultiByteToWideChar(CP_ACP, 0, strGBK, -1, NULL, 0);
+  str1 = new WCHAR[n];
+  MultiByteToWideChar(CP_ACP, 0, strGBK, -1, str1, n);
+  n = WideCharToMultiByte(CP_UTF8, 0, str1, -1, NULL, 0, NULL, NULL);
+  char *str2 = new char[n];
+  WideCharToMultiByte(CP_UTF8, 0, str1, -1, str2, n, NULL, NULL);
+  delete[] str1;
+  str1 = NULL;
+  return str2;
 }
-
 void getFileNames(const FunctionCallbackInfo<Value> &args)
 {
   Isolate *isolate = args.GetIsolate();
@@ -39,7 +43,7 @@ void getFileNames(const FunctionCallbackInfo<Value> &args)
       {
         memset(szFilePathName, 0, MAX_PATH + 1);
         DragQueryFile(hDrop, nIndex, szFilePathName, MAX_PATH); // 得到文件名
-        fileNames->Set(nIndex, String::NewFromUtf8(isolate, szFilePathName));
+        fileNames->Set(nIndex, String::NewFromUtf8(isolate, GBK2Utf8(szFilePathName)));
       }
     }
     ::CloseClipboard(); // 关闭剪切板
