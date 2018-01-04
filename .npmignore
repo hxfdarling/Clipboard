@@ -1,0 +1,15 @@
+/node_modules
+/npm-debug.log
+yarn.lock
+
+# Ignore root level development test files
+/build/Release/obj
+/build/Release/binding.exp
+/build/Release/binding.lib
+/build/Release/binding.map
+/build/Release/binding.pdb
+/build/binding.sln
+/build/binding.vcxproj
+/build/binding.vcxproj.filters
+/build/config.gypi
+/src

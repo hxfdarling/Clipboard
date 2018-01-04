@@ -1,5 +1,5 @@
 {
-	"name": "clipboard",
+	"name": "@moa/clipboard",
 	"version": "1.0.0",
 	"description": "get file path from win32 clipboard",
 	"main": "./lib/index.js",
