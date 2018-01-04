@@ -13,3 +13,4 @@ yarn.lock
 /build/binding.vcxproj.filters
 /build/config.gypi
 /src
+/.vscode
