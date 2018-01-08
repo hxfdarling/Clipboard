@@ -1,6 +1,6 @@
 # clipboard
 
-get file path from win32 clipboard by nodejs
+get data(file path,text) from clipboard by nodejs. support win32 and osx
 
 ## build for nwjs
 
@@ -8,8 +8,17 @@ get file path from win32 clipboard by nodejs
  nw-gyp rebuild --target=0.14.7 --arch=ia32
 ```
 
+## build for nodejs
+
+```shell
+  node-gyp configure
+  node-gyp rebuild
+```
+
 ## example
 
 ```js
-const clipboard = require('@moa/clipboard');let fileNames = clipboard.getFileNames();
+const clipboard = require('@moa/clipboard');
+let fileNames = clipboard.getFileNames();
+let text = clipboard.getText();
 ```

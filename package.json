@@ -1,7 +1,7 @@
 {
-	"name": "@moa/clipboard",
+	"name": "clipboard",
 	"version": "1.0.0",
-	"description": "get file path from win32 clipboard",
+	"description": "get data(text,file path) from clipboard,support win32 and mac osx",
 	"main": "./lib/index.js",
 	"directories": {
 		"lib": "lib",

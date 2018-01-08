@@ -1,2 +1,3 @@
 const clipboard = require("../");
-console.log(clipboard.getFileNames());
+console.log("files:", clipboard.getFileNames());
+console.log("text:", clipboard.getText());
