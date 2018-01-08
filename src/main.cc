@@ -24,7 +24,10 @@ void getText(const FunctionCallbackInfo<Value> &args)
 {
   Isolate *isolate = args.GetIsolate();
   char *text = get_text(isolate);
-  args.GetReturnValue().Set(String::NewFromUtf8(isolate, text));
+  if (text)
+  {
+    args.GetReturnValue().Set(String::NewFromUtf8(isolate, text));
+  }
 }
 void Init(Local<Object> exports)
 {

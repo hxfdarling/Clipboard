@@ -1,4 +1,4 @@
-#include "clip_win.h";
+#include "clip_win.h"
 
 char *GBK2Utf8(const char *strGBK)
 {
@@ -13,27 +13,39 @@ char *GBK2Utf8(const char *strGBK)
   str1 = NULL;
   return str2;
 }
+char *UnicodeToUtf8(const wchar_t *unicode)
+{
+  int len;
+  len = WideCharToMultiByte(CP_UTF8, 0, unicode, -1, NULL, 0, NULL, NULL);
+  char *szUtf8 = (char *)malloc(len + 1);
+  memset(szUtf8, 0, len + 1);
+  WideCharToMultiByte(CP_UTF8, 0, unicode, -1, szUtf8, len, NULL, NULL);
+  return szUtf8;
+}
 
 char *get_text(Isolate *isolate)
 {
   char *pBuf;
-  HANDLE hWnd;
-
-  if (IsClipboardFormatAvailable(CF_TEXT)) //判断格式是否是我们所需要
+  HANDLE hMem;
+  if (IsClipboardFormatAvailable(CF_UNICODETEXT)) //判断格式是否是我们所需要
   {
+    HWND hWnd = NULL;
     OpenClipboard(hWnd);
     //读取数据
-    hWnd = GetClipboardData(CF_TEXT);
-    pBuf = (char *)GlobalLock(hWnd);
-    GlobalUnlock(hClip);
+    hMem = GetClipboardData(CF_UNICODETEXT);
+    if (hMem != NULL)
+    {
+      wchar_t *tmp = (wchar_t *)GlobalLock(hMem);
+      GlobalUnlock(hMem);
+      pBuf = UnicodeToUtf8(tmp);
+    }
     CloseClipboard();
   }
-  return GBK2Utf8(pBuf);
+  return pBuf;
 }
 
-Local<Array> get_file_names(const FunctionCallbackInfo<Value> &args)
+Local<Array> get_file_names(Isolate *isolate)
 {
-  Isolate *isolate = args.GetIsolate();
   HWND hWnd = NULL;
   Local<Array> fileNames = Array::New(isolate, 0);
   if (IsClipboardFormatAvailable(CF_HDROP))

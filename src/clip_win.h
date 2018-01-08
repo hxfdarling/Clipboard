@@ -10,4 +10,4 @@ using v8::String;
 using v8::Value;
 
 char *get_text(Isolate *isolate);
-Local<Array> get_file_names(const FunctionCallbackInfo<Value> &args)
+Local<Array> get_file_names(Isolate *isolate);
