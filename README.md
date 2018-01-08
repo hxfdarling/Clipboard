@@ -11,14 +11,13 @@ get data(file path,text) from clipboard by nodejs. support win32 and osx
 ## build for nodejs
 
 ```shell
-  node-gyp configure
   node-gyp rebuild
 ```
 
 ## example
 
 ```js
-const clipboard = require('@moa/clipboard');
+const clipboard = require('clipboard');
 let fileNames = clipboard.getFileNames();
 let text = clipboard.getText();
 ```
