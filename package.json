@@ -8,7 +8,8 @@
 		"test": "test"
 	},
 	"scripts": {
-		"test": "node ./test"
+		"test": "node ./test",
+		"install": "node-gyp rebuild"
 	},
 	"author": "zman",
 	"license": "ISC",
